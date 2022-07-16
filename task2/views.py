@@ -37,7 +37,6 @@ def calculator(request):
     action = data['action']
     number1 = int(data['number1'])
     number2 = int(data['number2'])
-    result = 0
     if action not in actions:
         raise ValidationError(f'{action} not in action list')
     else:
