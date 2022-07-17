@@ -9,7 +9,7 @@ dt = date.today()
 
 @api_view(http_method_names=['GET'])
 def today(request):
-    return Response({'date': dt.strftime('dd/mm/YY'), 'year': dt.year, 'month': dt.month, 'day': dt.day})
+    return Response({'date': dt.strftime('%d/%m/%Y'), 'year': dt.year, 'month': dt.month, 'day': dt.day})
 
 
 @api_view(http_method_names=['GET'])
@@ -20,8 +20,13 @@ def hello_world(request):
 # http://127.0.0.1:8000/task2/my_name/?name=Maks
 @api_view(http_method_names=['GET'])
 def my_name(request):
-    name_of_hacker = request.query_params['name']
-    return Response({'name': name_of_hacker})
+    try:
+        name_of_hacker = request.query_params['name']
+        print('request', request)
+        print("request.query_params", dict(request.query_params))
+        return Response({'name': name_of_hacker})
+    except KeyError:
+        raise ValidationError
 
 
 # Test data
