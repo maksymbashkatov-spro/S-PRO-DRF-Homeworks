@@ -19,3 +19,8 @@ class StoresViewSet(ModelViewSet, GenericViewSet):
 
     def perform_create(self, serializer):
         serializer.save(**{'owner': self.request.user})
+
+
+class MyStoresViewSet(ModelViewSet, GenericViewSet):
+    def list(self, request, *args, **kwargs):
+        queryset = Store.objects.filter(owner=self.request.user)
