@@ -23,6 +23,15 @@ class Store(models.Model):
         null=True,
         blank=True
     )
+    status = models.CharField(
+        choices=(
+            ('active', 'Active'),
+            ('deactivated', 'Deactivated'),
+            ('in_review', 'In review')
+        ),
+        max_length=20,
+        default='in_review'
+    )
 
     class Meta:
         db_table = 'stores'
